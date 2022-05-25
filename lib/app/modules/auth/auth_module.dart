@@ -9,7 +9,7 @@ class AuthModule extends Module {
   List<ModularRoute> get routes => [
         ChildRoute(
           Modular.initialRoute,
-          child: (_, __) => const AuthHomePage(),
+          child: (_, __) =>  AuthHomePage(),
         )
       ];
 }
