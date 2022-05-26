@@ -1,3 +1,4 @@
+import 'package:cuidapet_mobile/app/core/ui/extensions/theme_extensions.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
