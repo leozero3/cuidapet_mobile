@@ -10,6 +10,6 @@ class AuthModule extends Module {
   List<ModularRoute> get routes => [
         ChildRoute(Modular.initialRoute,
             child: (_, __) => AuthHomePage(authStore: Modular.get())),
-    ModuleRoute('/login', module: LoginModule())
+    ModuleRoute('/login/', module: LoginModule())
       ];
 }
