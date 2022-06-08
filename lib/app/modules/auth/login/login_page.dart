@@ -1,5 +1,6 @@
 import 'package:cuidapet_mobile/app/core/ui/icons/cuidapet_icons.dart';
 import 'package:cuidapet_mobile/app/core/ui/widgets/cuidapet_textform_field.dart';
+import 'package:cuidapet_mobile/app/core/ui/widgets/rounded_button_with_icon.dart';
 import 'package:flutter/material.dart';
 //login_page
 
@@ -41,7 +42,19 @@ class LoginPage extends StatelessWidget {
                 child: Text('Validar'),
               ),
               Icon(Cuidapet.facebook),
-              Icon(Cuidapet.google)
+              Icon(Cuidapet.google),
+              RoundedButtonWithIcon(
+                onTap: () {},
+                width: 200,
+                color: Colors.blue,
+                icon: Cuidapet.facebook, label: 'Facebook',
+              ),
+              RoundedButtonWithIcon(
+                onTap: () {},
+                width: 200,
+                color: Colors.orange,
+                icon: Cuidapet.google, label: 'Google',
+              ),
             ],
           ),
         ),
