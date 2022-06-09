@@ -1,4 +1,5 @@
 import 'package:cuidapet_mobile/app/core/ui/icons/cuidapet_icons.dart';
+import 'package:cuidapet_mobile/app/core/ui/widgets/cuidapet_default_button.dart';
 import 'package:cuidapet_mobile/app/core/ui/widgets/cuidapet_textform_field.dart';
 import 'package:cuidapet_mobile/app/core/ui/widgets/rounded_button_with_icon.dart';
 import 'package:flutter/material.dart';
@@ -14,7 +15,7 @@ class LoginPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('login page'),
+        title: const Text('login page'),
       ),
       body: Padding(
         padding: const EdgeInsets.all(8.0),
@@ -39,22 +40,28 @@ class LoginPage extends StatelessWidget {
                   formkey.currentState?.validate();
                   Text(testeEC.text);
                 },
-                child: Text('Validar'),
+                child: const Text('Validar'),
               ),
-              Icon(Cuidapet.facebook),
-              Icon(Cuidapet.google),
+              const Icon(Cuidapet.facebook),
+              const Icon(Cuidapet.google),
               RoundedButtonWithIcon(
                 onTap: () {},
                 width: 200,
                 color: Colors.blue,
-                icon: Cuidapet.facebook, label: 'Facebook',
+                icon: Cuidapet.facebook,
+                label: 'Facebook',
               ),
               RoundedButtonWithIcon(
                 onTap: () {},
                 width: 200,
                 color: Colors.orange,
-                icon: Cuidapet.google, label: 'Google',
+                icon: Cuidapet.google,
+                label: 'Google',
               ),
+              CuidapetDefaultButton(
+                onPressed: () {},
+                label: 'Entrar',
+              )
             ],
           ),
         ),
