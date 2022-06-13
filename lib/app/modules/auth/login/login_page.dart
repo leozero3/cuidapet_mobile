@@ -1,9 +1,14 @@
+import 'package:cuidapet_mobile/app/core/ui/extensions/size_screen_extension.dart';
+import 'package:cuidapet_mobile/app/core/ui/extensions/theme_extensions.dart';
 import 'package:cuidapet_mobile/app/core/ui/icons/cuidapet_icons.dart';
 import 'package:cuidapet_mobile/app/core/ui/widgets/cuidapet_default_button.dart';
 import 'package:cuidapet_mobile/app/core/ui/widgets/cuidapet_textform_field.dart';
 import 'package:cuidapet_mobile/app/core/ui/widgets/rounded_button_with_icon.dart';
 import 'package:flutter/material.dart';
-//login_page
+
+part 'widget/login_form.dart';
+
+part 'widget/login_register_buttons.dart';
 
 class LoginPage extends StatelessWidget {
   final testeEC = TextEditingController();
@@ -14,58 +19,64 @@ class LoginPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('login page'),
-      ),
-      body: Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: Form(
-          key: formkey,
+      body: SingleChildScrollView(
+        child: Padding(
+          padding: const EdgeInsets.all(15),
           child: Column(
             children: [
-              CuidapetTextformField(
-                label: 'Login',
-                obscureText: true,
-                controller: testeEC,
-                validator: (String? value) {
-                  if (value == null || value.isEmpty) {
-                    return 'Valor Obrigatorio';
-                  }
-                  return null;
-                },
+              SizedBox(height: 50.h),
+              Center(
+                child: Image.asset(
+                  'assets/images/logo.png',
+                  width: 162.w,
+                  fit: BoxFit.fill,
+                ),
               ),
-              Text(testeEC.text),
-              ElevatedButton(
-                onPressed: () {
-                  formkey.currentState?.validate();
-                  Text(testeEC.text);
-                },
-                child: const Text('Validar'),
-              ),
-              const Icon(Cuidapet.facebook),
-              const Icon(Cuidapet.google),
-              RoundedButtonWithIcon(
-                onTap: () {},
-                width: 200,
-                color: Colors.blue,
-                icon: Cuidapet.facebook,
-                label: 'Facebook',
-              ),
-              RoundedButtonWithIcon(
-                onTap: () {},
-                width: 200,
-                color: Colors.orange,
-                icon: Cuidapet.google,
-                label: 'Google',
-              ),
-              CuidapetDefaultButton(
-                onPressed: () {},
-                label: 'Entrar',
-              )
+              const SizedBox(height: 20),
+              const _LoginForm(),
+              const SizedBox(height: 8),
+              const _OrSeparator(),
+              const SizedBox(height: 8),
+              const _LoginRegisterButtons()
             ],
           ),
         ),
       ),
+    );
+  }
+}
+
+class _OrSeparator extends StatelessWidget {
+  const _OrSeparator({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      children: [
+        Expanded(
+          child: Divider(
+            thickness: 1,
+            color: context.primaryColor,
+          ),
+        ),
+        Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Text(
+            'OU',
+            style: TextStyle(
+              fontWeight: FontWeight.bold,
+              fontSize: 20.sp,
+              color: context.primaryColor,
+            ),
+          ),
+        ),
+        Expanded(
+          child: Divider(
+            thickness: 1,
+            color: context.primaryColor,
+          ),
+        ),
+      ],
     );
   }
 }
