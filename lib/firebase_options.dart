@@ -63,6 +63,7 @@ class DefaultFirebaseOptions {
     messagingSenderId: '178055752836',
     projectId: 'cuidapet-leonardo',
     storageBucket: 'cuidapet-leonardo.appspot.com',
+    androidClientId: '178055752836-q5git7dqjtrttpec0g8sg0bc74nnpfih.apps.googleusercontent.com',
     iosClientId: '178055752836-5jg3anpq79lfmrs2qa64hvqdssrdqr0s.apps.googleusercontent.com',
     iosBundleId: 'com.example.cuidapetMobile',
   );
