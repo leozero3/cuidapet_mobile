@@ -19,7 +19,7 @@ class LoginPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final url = Environments.param('base_url');
+    final url = Environments.param('base_url1');
     print(url);
     return Scaffold(
       body: SingleChildScrollView(
@@ -27,7 +27,7 @@ class LoginPage extends StatelessWidget {
           padding: const EdgeInsets.all(15),
           child: Column(
             children: [
-              Text(url ?? ''),
+              Text(url ?? 'EFDSFS'),
               SizedBox(height: 50.h),
               Center(
                 child: Image.asset(
@@ -37,7 +37,7 @@ class LoginPage extends StatelessWidget {
                 ),
               ),
               const SizedBox(height: 20),
-              Text(url ?? 'sdfsfsfs', style: TextStyle(color: Colors.black),),
+              Text(url ?? 'sdfsfsfs', style: const TextStyle(color: Colors.black),),
               const _LoginForm(),
               const SizedBox(height: 8),
               const _OrSeparator(),
