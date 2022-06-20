@@ -1,4 +1,3 @@
-import 'package:cuidapet_mobile/app/core/helpers/environments.dart';
 import 'package:cuidapet_mobile/app/core/ui/extensions/size_screen_extension.dart';
 import 'package:cuidapet_mobile/app/core/ui/extensions/theme_extensions.dart';
 import 'package:cuidapet_mobile/app/core/ui/icons/cuidapet_icons.dart';
@@ -19,15 +18,13 @@ class LoginPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final url = Environments.param('base_url1');
-    print(url);
+
     return Scaffold(
       body: SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.all(15),
           child: Column(
             children: [
-              Text(url ?? 'EFDSFS'),
               SizedBox(height: 50.h),
               Center(
                 child: Image.asset(
@@ -37,7 +34,6 @@ class LoginPage extends StatelessWidget {
                 ),
               ),
               const SizedBox(height: 20),
-              Text(url ?? 'sdfsfsfs', style: const TextStyle(color: Colors.black),),
               const _LoginForm(),
               const SizedBox(height: 8),
               const _OrSeparator(),
