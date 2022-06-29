@@ -68,3 +68,4 @@ class DefaultFirebaseOptions {
     iosBundleId: 'com.example.cuidapetMobile',
   );
 }
+
