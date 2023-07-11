@@ -1,5 +1,7 @@
 import 'package:cuidapet_mobile/app/core/ui/icons/cuidapet_icons.dart';
+import 'package:cuidapet_mobile/app/core/ui/widgets/cuidapet_default_button.dart';
 import 'package:cuidapet_mobile/app/core/ui/widgets/cuidapet_text_form_field.dart';
+import 'package:cuidapet_mobile/app/core/ui/widgets/rounded_button_with_icon.dart';
 import 'package:flutter/material.dart';
 
 class LoginPage extends StatelessWidget {
@@ -30,16 +32,25 @@ class LoginPage extends StatelessWidget {
                   return null;
                 },
               ),
-              Text(textController.text),
-              ElevatedButton(
-                onPressed: () {
-                  formKey.currentState?.validate();
-                  print(textController.text);
-                },
-                child: Text(textController.text),
+              RoundedButtonWithIcon(
+                onTap: () {},
+                width: 200,
+                color: Colors.blue,
+                icon: Cuidapet.facebook,
+                label: 'Facebook',
               ),
-              Icon(Cuidapet.facebook),
-              Icon(Cuidapet.google),
+              RoundedButtonWithIcon(
+                onTap: () {},
+                width: 200,
+                color: Colors.orange,
+                icon: Cuidapet.facebook,
+                label: 'Google',
+              ),
+              CuidapetDefaultButton(
+                onPressed: () {},
+                borderRadius: 10,
+                label: 'Entrar',
+              ),
             ],
           ),
         ),
