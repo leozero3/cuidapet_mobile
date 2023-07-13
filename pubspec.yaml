@@ -42,6 +42,7 @@ dependencies:
   asuka: 2.1.0
   dio: 5.2.1
   flutter_screenutil: 5.8.3
+  firebase_core: 2.14.0
 
   
   
