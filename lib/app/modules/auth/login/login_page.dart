@@ -1,3 +1,4 @@
+import 'package:cuidapet_mobile/app/core/helpers/environments.dart';
 import 'package:cuidapet_mobile/app/core/ui/extensions/size_screen_extension.dart';
 import 'package:cuidapet_mobile/app/core/ui/extensions/theme_extensions.dart';
 import 'package:cuidapet_mobile/app/core/ui/icons/cuidapet_icons.dart';
@@ -19,6 +20,7 @@ class LoginPage extends StatelessWidget {
           padding: const EdgeInsets.all(15),
           child: Column(
             children: [
+              Text(Environments.param('base_url') ?? ''),
               SizedBox(
                 height: 50.h,
               ),
