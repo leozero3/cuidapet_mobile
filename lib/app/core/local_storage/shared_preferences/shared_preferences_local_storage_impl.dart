@@ -14,7 +14,6 @@ class SharedPreferencesLocalStorageImpl implements LocalStorage {
   Future<bool> contains(String key) async {
     final sharedPreferences = await _instance;
     return sharedPreferences.containsKey(key);
-    
   }
 
   @override
@@ -26,15 +25,33 @@ class SharedPreferencesLocalStorageImpl implements LocalStorage {
   @override
   Future<void> remove(String key) async {
     final sharedPreferences = await _instance;
-    return sharedPreferences.remove(key);
+    sharedPreferences.remove(key);
   }
 
   @override
-  Future<void> write<V>(String key, V value) {
+  Future<void> write<V>(String key, V value) async {
     final sharedPreferences = await _instance;
 
-    if (V == String) {
-      
+    switch (V) {
+      case String:
+        await sharedPreferences.setString(key, value as String);
+        break;
+      case int:
+        await sharedPreferences.setInt(key, value as int);
+        break;
+      case bool:
+        await sharedPreferences.setBool(key, value as bool);
+        break;
+      case double:
+        await sharedPreferences.setDouble(key, value as double);
+        break;
+      case const (List<String>):
+        await sharedPreferences.setStringList(key, value as List<String>);
+        break;
+      default:
+        {
+          throw Exception('Type not Suported');
+        }
     }
   }
 }
