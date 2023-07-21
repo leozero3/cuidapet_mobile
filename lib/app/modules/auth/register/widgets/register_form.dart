@@ -8,20 +8,59 @@ class _RegisterForm extends StatefulWidget {
 }
 
 class _RegisterFormState extends State<_RegisterForm> {
+  final _formKey = GlobalKey<FormState>();
+  final _loginEC = TextEditingController();
+  final _passwordEC = TextEditingController();
+
+  @override
+  void dispose() {
+    _loginEC.dispose();
+    _passwordEC.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Form(
+      key: _formKey,
       child: Column(
         children: [
-          CuidapetTextFormField(label: 'Login'),
+          CuidapetTextFormField(
+            label: 'Login',
+            controller: _loginEC,
+            validator: Validatorless.multiple([
+              Validatorless.required('Login Obrigatorio'),
+              Validatorless.email('login deve ser um e-mail válido'),
+            ]),
+          ),
           const SizedBox(height: 20),
-          CuidapetTextFormField(label: 'Senha', obscuteText: true,),
+          CuidapetTextFormField(
+            label: 'Senha',
+            obscuteText: true,
+            controller: _passwordEC,
+            validator: Validatorless.multiple([
+              Validatorless.required('Senha obrigatoria'),
+              Validatorless.min(6, 'Senha precisa ter pelo menos 6 caracteres'),
+              Validatorless.compare(_passwordEC, 'Senha estão diferentes')
+            ]),
+          ),
           const SizedBox(height: 20),
-          CuidapetTextFormField(label: 'Corfirmar senha', obscuteText: true,),
+          CuidapetTextFormField(
+            label: 'Corfirmar senha',
+            obscuteText: true,
+            validator: Validatorless.multiple([Validatorless.required('É obrigatório confirmar a senha')]),
+          ),
           const SizedBox(height: 20),
           CuidapetDefaultButton(
-            onPressed: () {},
+            onPressed: () {
+              final formValid= _formKey.currentState?.validate() ?? false;
+
+              if (formValid) {
+                
+              }
+            },
             label: 'Cadastrar',
+
           ),
         ],
       ),
