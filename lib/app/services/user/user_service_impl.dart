@@ -1,6 +1,8 @@
 import 'package:cuidapet_mobile/app/core/exceptions/failure.dart';
 import 'package:cuidapet_mobile/app/core/exceptions/user_exists_exceptions.dart';
 import 'package:cuidapet_mobile/app/core/exceptions/user_not_exists_exception.dart';
+import 'package:cuidapet_mobile/app/core/helpers/constants.dart';
+import 'package:cuidapet_mobile/app/core/local_storage/local_storage.dart';
 import 'package:cuidapet_mobile/app/core/logger/app_logger.dart';
 import 'package:cuidapet_mobile/app/repositories/user/user_repository.dart';
 import 'package:cuidapet_mobile/app/services/user/user_service.dart';
@@ -9,12 +11,15 @@ import 'package:firebase_auth/firebase_auth.dart';
 class UserServiceImpl implements UserService {
   final UserRepository _userRepository;
   final AppLogger _log;
+  final LocalStorage _localStorage;
 
   UserServiceImpl({
     required UserRepository userRepository,
     required AppLogger log,
+    required LocalStorage localStorage,
   })  : _userRepository = userRepository,
-        _log = log;
+        _log = log,
+        _localStorage = localStorage;
 
   @override
   Future<void> register(String email, String password) async {
@@ -57,7 +62,13 @@ class UserServiceImpl implements UserService {
               message:
                   'E-mail não confirmado, por favor verifique sua caixa de spam');
         }
-        print('Email verificado');
+
+
+        final accessToken = await _userRepository.login(email, password);
+        await _seveAccessToken(accessToken);
+        final xx = await _localStorage.read<String>(Constants.LOCAL_STORAGE_ACCESS_TOKEN_KEY);
+        print(xx);
+
       } else {
         throw Failure(
           message:
@@ -67,7 +78,10 @@ class UserServiceImpl implements UserService {
     } on FirebaseAuthException catch (e, s) {
       _log.error('Usuario ou Senh inválidos, firebaseAuth[${e.code}]', e, s);
       throw Failure(message: 'Usuario ou Senh inválidos!!!');
-      print(e);
     }
+  }
+  
+  Future<void> _seveAccessToken(String accessToken) async {
+    _localStorage.write<String>(Constants.LOCAL_STORAGE_ACCESS_TOKEN_KEY, accessToken);
   }
 }
