@@ -24,7 +24,7 @@ class LoginPage extends StatelessWidget {
           padding: const EdgeInsets.all(15),
           child: Column(
             children: [
-              Text(Environments.param('base_url') ?? ''),
+              // Text(Environments.param('base_url') ?? ''),
               SizedBox(
                 height: 50.h,
               ),
