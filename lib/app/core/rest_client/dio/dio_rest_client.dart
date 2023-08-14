@@ -173,11 +173,11 @@ class DioRestClient implements RestClient {
     throw RestClientException(
       error: dioError.error,
       message: response?.statusMessage,
-      statusCode: response?.statusCode,
+      statusCode: response?.statusCode, 
       response: RestClientResponse(
           data: response?.data,
           statusCode: response?.statusCode,
-          statusMessage: response?.statusMessage),
+          statusMessage: response?.statusMessage,  ),
     );
   }
 }

@@ -1,10 +1,14 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
+import 'dart:io';
+
 import 'package:cuidapet_mobile/app/core/exceptions/failure.dart';
 import 'package:cuidapet_mobile/app/core/exceptions/user_exists_exceptions.dart';
 import 'package:cuidapet_mobile/app/core/logger/app_logger.dart';
 import 'package:cuidapet_mobile/app/core/rest_client/rest_client.dart';
 import 'package:cuidapet_mobile/app/core/rest_client/rest_client_exception.dart';
+import 'package:cuidapet_mobile/app/models/confirm_login_model.dart';
 import 'package:cuidapet_mobile/app/repositories/user/user_repository.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 
 class UserRepositoryImpl implements UserRepository {
   final RestClient _restClient;
@@ -53,6 +57,27 @@ class UserRepositoryImpl implements UserRepository {
       }
       _log.error('Erro ao realizar login', e, s);
       throw Failure(message: 'Erro ao realizar login, tente novamente!!!');
+    }
+  }
+
+  @override
+  Future<ConfirmLoginModel> confirmLogin() async {
+    try {
+      final deviceToken = await FirebaseMessaging.instance.getToken();
+            print('XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX');
+
+      print(deviceToken.toString());
+      print('XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX');
+
+      final result = await _restClient.auth().patch('/auth/confirm', data: {
+        'ios_token': Platform.isIOS ? deviceToken : null,
+        'android_token': Platform.isAndroid ? deviceToken : null,
+      });
+
+      return ConfirmLoginModel.fromMap(result.data);
+    } on RestClientException catch (e, s) {
+      _log.error('Erro ao confirmar login', e, s);
+      throw Failure(message: 'Erro ao confirmar login');
     }
   }
 }
