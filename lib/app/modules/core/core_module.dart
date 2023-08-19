@@ -12,17 +12,31 @@ import '../../core/local_storage/flutter_secure_storage/flutter_secure_storage_l
 class CoreModule extends Module {
   @override
   List<Bind> get binds => [
-        Bind.lazySingleton((i) => AuthStore(), export: true),
-        Bind.lazySingleton<AppLogger>((i) => LoggerAppLogarImpl(),
-            export: true),
+        Bind.lazySingleton<AppLogger>(
+          (i) => LoggerAppLogarImpl(),
+          export: true,
+        ),
         Bind.lazySingleton<LocalStorage>(
-            (i) => SharedPreferencesLocalStorageImpl(),
-            export: true),
+          (i) => SharedPreferencesLocalStorageImpl(),
+          export: true,
+        ),
         Bind.lazySingleton<LocalSecureStorage>(
-            (i) => FlutterSecureStorageLocalStorageImpl(),
-            export: true),
+          (i) => FlutterSecureStorageLocalStorageImpl(),
+          export: true,
+        ),
+        Bind.lazySingleton(
+          (i) => AuthStore(
+            localStorage: i(),
+          ),
+          export: true,
+        ),
         Bind.lazySingleton<RestClient>(
-            (i) => DioRestClient(localStorage: i(), log: i()),
-            export: true),
+          (i) => DioRestClient(
+            localStorage: i(),
+            log: i(),
+            authStore: i(),
+          ),
+          export: true,
+        ),
       ];
 }

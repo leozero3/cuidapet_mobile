@@ -70,6 +70,7 @@ class UserServiceImpl implements UserService {
         final accessToken = await _userRepository.login(email, password);
         await _seveAccessToken(accessToken);
         await _confirmLogin();
+        await _getUserData();
       } else {
         throw Failure(
           message:
@@ -92,16 +93,5 @@ class UserServiceImpl implements UserService {
     await _seveAccessToken(confirmLoginModel.accessToken);
     await _localSecureStorage.write(Constants.LOCAL_STORAGE_REFRESH_TOKEN_KEY,
         confirmLoginModel.refreshToken);
-  }
-
-  @override
-  Future<void> SocialLogin(SocialLoginType socialLoginType) async {
-    switch (socialLoginType) {
-      case SocialLoginType.facebook:
-        break;
-      case SocialLoginType.google:
-        break;
-      default:
-    }
   }
 }
