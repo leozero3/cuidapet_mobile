@@ -4,6 +4,7 @@ import 'package:cuidapet_mobile/app/core/exceptions/user_not_exists_exception.da
 import 'package:cuidapet_mobile/app/core/helpers/constants.dart';
 import 'package:cuidapet_mobile/app/core/local_storage/local_storage.dart';
 import 'package:cuidapet_mobile/app/core/logger/app_logger.dart';
+import 'package:cuidapet_mobile/app/models/social_login_type.dart';
 import 'package:cuidapet_mobile/app/repositories/user/user_repository.dart';
 import 'package:cuidapet_mobile/app/services/user/user_service.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -91,5 +92,16 @@ class UserServiceImpl implements UserService {
     await _seveAccessToken(confirmLoginModel.accessToken);
     await _localSecureStorage.write(Constants.LOCAL_STORAGE_REFRESH_TOKEN_KEY,
         confirmLoginModel.refreshToken);
+  }
+
+  @override
+  Future<void> SocialLogin(SocialLoginType socialLoginType) async {
+    switch (socialLoginType) {
+      case SocialLoginType.facebook:
+        break;
+      case SocialLoginType.google:
+        break;
+      default:
+    }
   }
 }
