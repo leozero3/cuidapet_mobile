@@ -94,4 +94,21 @@ class UserServiceImpl implements UserService {
     await _localSecureStorage.write(Constants.LOCAL_STORAGE_REFRESH_TOKEN_KEY,
         confirmLoginModel.refreshToken);
   }
+
+  Future<void> _getUserData() async {
+    final userModel = await _userRepository.getUserLogged();
+    await _localStorage.write<String>(
+        Constants.LOCAL_STORAGE_USER_LOGGED_DATA_KEY, userModel.toJson());
+  }
+
+  @override
+  Future<void> SocialLogin(SocialLoginType socialLoginType) async {
+    switch (socialLoginType) {
+      case SocialLoginType.facebook:
+        break;
+      case SocialLoginType.google:
+        break;
+      default:
+    }
+  }
 }
