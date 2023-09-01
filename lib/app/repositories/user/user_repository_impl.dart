@@ -104,7 +104,7 @@ class UserRepositoryImpl implements UserRepository {
         'supplier_user': false,
       });
 
-      return result.data('access_token');
+      return result.data['access_token'];
     } on RestClientException catch (e, s) {
       if (e.statusCode == 403) {
         throw Failure(
