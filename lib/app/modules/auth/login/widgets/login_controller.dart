@@ -34,12 +34,12 @@ abstract class LoginControllerBase with Store {
       Modular.to.navigate('/auth/');
     } on Failure catch (e, s) {
       final errorMessage = e.message ?? 'Erro ao realizar login';
-      _log.error(errorMessage, e , s);
+      _log.error(errorMessage, e, s);
       Loader.hide();
       Messages.alert(errorMessage);
       Messages.alert(errorMessage);
-    }on UserNotExistsException  {
-     const errorMessage = 'Usuario não cadastrado';
+    } on UserNotExistsException {
+      const errorMessage = 'Usuario não cadastrado';
       _log.error(errorMessage);
       Loader.hide();
       Messages.alert(errorMessage);
@@ -48,15 +48,14 @@ abstract class LoginControllerBase with Store {
 
   Future<void> socialLogin(SocialLoginType socialLoginType) async {
     try {
-  Loader.show();
-  await _userService.SocialLogin(socialLoginType);
-  Loader.hide();
-}on Failure catch (e, s) {
-  Loader.hide();
-  _log.error('Erro ao fazer Login', e, s);
-  Messages.alert(e.message ?? 'Erro ao realizar login');
-}
-
+      Loader.show();
+      await _userService.SocialLogin(socialLoginType);
+      Loader.hide();
+      Modular.to.navigate('/auth/');
+    } on Failure catch (e, s) {
+      Loader.hide();
+      _log.error('Erro ao fazer Login', e, s);
+      Messages.alert(e.message ?? 'Erro ao realizar login');
+    }
   }
-
 }
