@@ -3,6 +3,7 @@ import 'package:cuidapet_mobile/app/core/helpers/environments.dart';
 import 'package:cuidapet_mobile/app/core/local_storage/local_storage.dart';
 import 'package:cuidapet_mobile/app/core/logger/app_logger.dart';
 import 'package:cuidapet_mobile/app/core/rest_client/dio/interceptors/auth_interceptors.dart';
+import 'package:cuidapet_mobile/app/core/rest_client/dio/interceptors/auth_refresh_token_interceptor.dart';
 import 'package:cuidapet_mobile/app/core/rest_client/rest_client.dart';
 import 'package:cuidapet_mobile/app/core/rest_client/rest_client_exception.dart';
 import 'package:cuidapet_mobile/app/core/rest_client/rest_client_response.dart';
@@ -26,6 +27,7 @@ class DioRestClient implements RestClient {
 
   DioRestClient({
     required LocalStorage localStorage,
+    required LocalSecureStorage localSecureStorage,
     required AppLogger log,
     required AuthStore authStore,
     BaseOptions? baseOptions,
@@ -33,6 +35,12 @@ class DioRestClient implements RestClient {
     _dio = Dio(baseOptions ?? _defaultOptions);
     _dio.interceptors.addAll([
       AuthInterceptors(localStorage: localStorage, authStore: authStore),
+      AuthRefreshTokenInterceptor(
+          authStore: authStore,
+          localStorage: localStorage,
+          localSecureStorage: localSecureStorage,
+          restClient: this,
+          log: log),
       LogInterceptor(requestBody: true, responseBody: true),
     ]);
   }
