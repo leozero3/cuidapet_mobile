@@ -7,10 +7,11 @@ class _RegisterForm extends StatefulWidget {
   State<_RegisterForm> createState() => _RegisterFormState();
 }
 
-class _RegisterFormState extends ModularState<_RegisterForm, RegisterController> {
+class _RegisterFormState extends State<_RegisterForm> {
   final _formKey = GlobalKey<FormState>();
   final _loginEC = TextEditingController();
   final _passwordEC = TextEditingController();
+  final controller = Modular.get<RegisterController>();
 
   @override
   void dispose() {
@@ -42,7 +43,8 @@ class _RegisterFormState extends ModularState<_RegisterForm, RegisterController>
               controller: _passwordEC,
               validator: Validatorless.multiple([
                 Validatorless.required('Senha obrigatoria'),
-                Validatorless.min(6, 'Senha precisa ter pelo menos 6 caracteres'),
+                Validatorless.min(
+                    6, 'Senha precisa ter pelo menos 6 caracteres'),
                 Validatorless.compare(_passwordEC, 'Senha estão diferentes')
               ]),
             ),
@@ -50,20 +52,20 @@ class _RegisterFormState extends ModularState<_RegisterForm, RegisterController>
             CuidapetTextFormField(
               label: 'Corfirmar senha',
               obscuteText: true,
-              validator: Validatorless.multiple([Validatorless.required('É obrigatório confirmar a senha')]),
+              validator: Validatorless.multiple(
+                  [Validatorless.required('É obrigatório confirmar a senha')]),
             ),
             const SizedBox(height: 20),
             CuidapetDefaultButton(
               onPressed: () {
-                final formValid= _formKey.currentState?.validate() ?? false;
-      
+                final formValid = _formKey.currentState?.validate() ?? false;
+
                 if (formValid) {
-                   controller.register(email: _loginEC.text, password: _passwordEC.text);
-                  
+                  controller.register(
+                      email: _loginEC.text, password: _passwordEC.text);
                 }
               },
               label: 'Cadastrar',
-      
             ),
           ],
         ),
