@@ -54,6 +54,7 @@ dependencies:
   validatorless: ^1.2.3
   google_sign_in: ^6.1.6
   flutter_facebook_auth: ^6.0.3
+  flutter_typeahead: ^4.8.0
   
 
 
