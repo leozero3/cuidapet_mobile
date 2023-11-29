@@ -3,10 +3,10 @@ import 'package:flutter/material.dart';
 part 'widgets/address_item.dart';
 
 class AddressPage extends StatefulWidget {
-  const AddressPage({Key? key}) : super(key: key);
+  const AddressPage({super.key});
 
   @override
-  _AddressPageState createState() => _AddressPageState();
+  State<AddressPage> createState() => _AddressPageState();
 }
 
 class _AddressPageState extends State<AddressPage> {
@@ -31,7 +31,7 @@ class _AddressPageState extends State<AddressPage> {
                   fontWeight: FontWeight.bold,
                 ),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 20,
               ),
               Material(
@@ -48,14 +48,14 @@ class _AddressPageState extends State<AddressPage> {
               const SizedBox(
                 height: 20,
               ),
-              ListTile(
+              const ListTile(
                 leading: CircleAvatar(
+                  backgroundColor: Colors.red,
+                  radius: 30,
                   child: Icon(
                     Icons.near_me,
                     color: Colors.white,
                   ),
-                  backgroundColor: Colors.red,
-                  radius: 30,
                 ),
                 title: Text(
                   'Localização Atual',
@@ -68,7 +68,7 @@ class _AddressPageState extends State<AddressPage> {
               const SizedBox(
                 height: 20,
               ),
-              Column(
+              const Column(
                 children: [
                   _AddressItem(),
                   _AddressItem(),

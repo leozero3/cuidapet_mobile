@@ -7,5 +7,6 @@ mixin ControllerLifeCycle implements Disposable {
 
   void onReady() {}
 
+  @override
   void dispose() {}
 }

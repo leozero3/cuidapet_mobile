@@ -4,7 +4,7 @@ import 'package:cuidapet_mobile/app/core/exceptions/user_not_exists_exception.da
 import 'package:cuidapet_mobile/app/core/helpers/constants.dart';
 import 'package:cuidapet_mobile/app/core/local_storage/local_storage.dart';
 import 'package:cuidapet_mobile/app/core/logger/app_logger.dart';
-import 'package:cuidapet_mobile/app/models/Social_network_model.dart';
+import 'package:cuidapet_mobile/app/models/social_network_model.dart';
 import 'package:cuidapet_mobile/app/models/social_login_type.dart';
 import 'package:cuidapet_mobile/app/repositories/social/social_repository.dart';
 import 'package:cuidapet_mobile/app/repositories/user/user_repository.dart';
@@ -107,7 +107,7 @@ class UserServiceImpl implements UserService {
   }
 
   @override
-  Future<void> SocialLogin(SocialLoginType socialLoginType) async {
+  Future<void> socialLogin(SocialLoginType socialLoginType) async {
     try {
       final SocialNetworkModel socialModel;
       final AuthCredential authCredential;

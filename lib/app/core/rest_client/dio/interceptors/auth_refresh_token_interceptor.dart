@@ -3,7 +3,6 @@ import 'package:cuidapet_mobile/app/core/helpers/constants.dart';
 import 'package:cuidapet_mobile/app/core/local_storage/local_storage.dart';
 import 'package:cuidapet_mobile/app/core/logger/app_logger.dart';
 import 'package:cuidapet_mobile/app/core/rest_client/rest_client.dart';
-import 'package:cuidapet_mobile/app/core/rest_client/rest_client_exception.dart';
 import 'package:cuidapet_mobile/app/modules/core/auth/auth_store.dart';
 import 'package:dio/dio.dart';
 
@@ -12,7 +11,7 @@ class AuthRefreshTokenInterceptor extends Interceptor {
   final LocalStorage _localStorage; // atualizar o token jwt
   final LocalSecureStorage _localSecureStorage; // contem o refresh TOKEN
   final RestClient
-      _restClient; // chamada do refresh TOKEN e re-tenativa da requisicao anterior
+      _restClient; // chamada do refresh TOKEN e re-tentativa da requisicao anterior
   final AppLogger _log;
 
   AuthRefreshTokenInterceptor({

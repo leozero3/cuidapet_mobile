@@ -30,7 +30,7 @@ class RegisterPage extends StatelessWidget {
                 fit: BoxFit.fill,
               ),
             ),
-            _RegisterForm(),
+            const _RegisterForm(),
           ],
         ),
       ),

@@ -8,6 +8,7 @@ class HomeController = HomeControllerBase with _$HomeController;
 abstract class HomeControllerBase with Store, ControllerLifeCycle {
   @override
   void onInit([Map<String, dynamic>? params]) {
+    // ignore: avoid_print
     print('OnInit chamado');
   }
 

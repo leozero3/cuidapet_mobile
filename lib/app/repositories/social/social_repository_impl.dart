@@ -1,5 +1,5 @@
 import 'package:cuidapet_mobile/app/core/exceptions/failure.dart';
-import 'package:cuidapet_mobile/app/models/Social_network_model.dart';
+import 'package:cuidapet_mobile/app/models/social_network_model.dart';
 import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import './social_repository.dart';

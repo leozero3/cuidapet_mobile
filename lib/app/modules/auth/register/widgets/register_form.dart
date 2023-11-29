@@ -39,7 +39,7 @@ class _RegisterFormState extends State<_RegisterForm> {
             const SizedBox(height: 20),
             CuidapetTextFormField(
               label: 'Senha',
-              obscuteText: true,
+              obscureText: true,
               controller: _passwordEC,
               validator: Validatorless.multiple([
                 Validatorless.required('Senha obrigatoria'),
@@ -50,8 +50,8 @@ class _RegisterFormState extends State<_RegisterForm> {
             ),
             const SizedBox(height: 20),
             CuidapetTextFormField(
-              label: 'Corfirmar senha',
-              obscuteText: true,
+              label: 'Confirmar senha',
+              obscureText: true,
               validator: Validatorless.multiple(
                   [Validatorless.required('É obrigatório confirmar a senha')]),
             ),

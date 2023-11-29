@@ -12,6 +12,6 @@ abstract class PageLifeCycleState<C extends ControllerLifeCycle,
   void initState() {
     super.initState();
     controller.onInit(params);
-    WidgetsBinding.instance?.addPostFrameCallback((_) => controller.onReady());
+    WidgetsBinding.instance.addPostFrameCallback((_) => controller.onReady());
   }
 }

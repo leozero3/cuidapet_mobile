@@ -5,22 +5,22 @@ class CuidapetTextFormField extends StatelessWidget {
   CuidapetTextFormField(
       {Key? key,
       required this.label,
-      this.obscuteText = false,
+      this.obscureText = false,
       this.controller,
       this.validator})
-      : _ObscureTextVN = ValueNotifier<bool>(obscuteText),
+      : _obscureTextVN = ValueNotifier<bool>(obscureText),
         super(key: key);
 
   final TextEditingController? controller;
   final FormFieldValidator<String>? validator;
   final String label;
-  final bool obscuteText;
-  final ValueNotifier<bool> _ObscureTextVN;
+  final bool obscureText;
+  final ValueNotifier<bool> _obscureTextVN;
 
   @override
   Widget build(BuildContext context) {
     return ValueListenableBuilder<bool>(
-      valueListenable: _ObscureTextVN,
+      valueListenable: _obscureTextVN,
       builder: (_, obscureTextVNValue, __) {
         return TextFormField(
           controller: controller,
@@ -41,10 +41,10 @@ class CuidapetTextFormField extends StatelessWidget {
                 color: Colors.grey,
               ),
             ),
-            suffixIcon: obscuteText
+            suffixIcon: obscureText
                 ? IconButton(
                     onPressed: () {
-                      _ObscureTextVN.value = !obscureTextVNValue;
+                      _obscureTextVN.value = !obscureTextVNValue;
                     },
                     icon: Icon(
                       obscureTextVNValue ? Icons.lock : Icons.lock_open,

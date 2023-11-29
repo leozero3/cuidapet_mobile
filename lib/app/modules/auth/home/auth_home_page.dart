@@ -9,7 +9,7 @@ import 'package:mobx/mobx.dart';
 class AuthHomePage extends StatefulWidget {
   final AuthStore _authStore;
 
-  AuthHomePage({
+  const AuthHomePage({
     Key? key,
     required AuthStore authStore,
   })  : _authStore = authStore,
@@ -33,15 +33,15 @@ class _AuthHomePageState extends State<AuthHomePage> {
         }
       },
     );
-    WidgetsBinding.instance?.addPostFrameCallback((_) {
+    WidgetsBinding.instance.addPostFrameCallback((_) {
       widget._authStore.loadUserLogged();
-     });
+    });
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('AuthHomePage')),
+      appBar: AppBar(title: const Text('AuthHomePage')),
       body: Center(
         child: Image.asset(
           'assets/images/logo.png',

@@ -25,20 +25,17 @@ abstract class RegisterControllerBase with Store {
     required String password,
   }) async {
     try {
-  Loader.show();
-  await _userService.register(email, password);
-  Messages.info('Enviamos um email de confirmacao');
-  Loader.hide();
-} on UserExistsExceptions catch (e) {
-  Loader.hide();
-  Messages.alert('E-mail ja utilizado, por favor escolha outro');
-
-}catch(e,s){
-
-  _log.error('Erro ao registrar usuario', e,s);
-  Loader.hide();
-  Messages.alert('Erro ao registrar usuario');
-
-}
+      Loader.show();
+      await _userService.register(email, password);
+      Messages.info('Enviamos um email de confirmacao');
+      Loader.hide();
+    } on UserExistsExceptions catch (e) {
+      Loader.hide();
+      Messages.alert('E-mail ja utilizado, por favor escolha outro $e');
+    } catch (e, s) {
+      _log.error('Erro ao registrar usuario', e, s);
+      Loader.hide();
+      Messages.alert('Erro ao registrar usuario');
+    }
   }
 }

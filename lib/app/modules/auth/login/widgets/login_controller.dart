@@ -49,7 +49,7 @@ abstract class LoginControllerBase with Store {
   Future<void> socialLogin(SocialLoginType socialLoginType) async {
     try {
       Loader.show();
-      await _userService.SocialLogin(socialLoginType);
+      await _userService.socialLogin(socialLoginType);
       Loader.hide();
       Modular.to.navigate('/auth/');
     } on Failure catch (e, s) {

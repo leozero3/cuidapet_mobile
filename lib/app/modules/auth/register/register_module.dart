@@ -8,7 +8,7 @@ class RegisterModule extends Module {
         Bind.lazySingleton(
           (i) => RegisterController(
             userService: i(), // authModule
-            log: i(),   // CoreModule
+            log: i(), // CoreModule
           ),
         )
       ];
@@ -17,7 +17,7 @@ class RegisterModule extends Module {
   List<ModularRoute> get routes => [
         ChildRoute(
           Modular.initialRoute,
-          child: (context, args) => RegisterPage(),
+          child: (context, args) => const RegisterPage(),
         )
       ];
 }

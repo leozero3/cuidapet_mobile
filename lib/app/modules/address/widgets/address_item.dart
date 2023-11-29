@@ -6,10 +6,10 @@ class _AddressItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.symmetric(
+      margin: const EdgeInsets.symmetric(
         vertical: 10,
       ),
-      child: ListTile(
+      child: const ListTile(
         leading: CircleAvatar(
           radius: 30,
           backgroundColor: Colors.white,
@@ -19,7 +19,7 @@ class _AddressItem extends StatelessWidget {
           ),
         ),
         title: Text('Endereco aleatorio'),
-        subtitle: Text('complemento sdfjsk'),
+        subtitle: Text('complemento '),
       ),
     );
   }

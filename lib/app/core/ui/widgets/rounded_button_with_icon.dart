@@ -2,7 +2,7 @@ import 'package:cuidapet_mobile/app/core/ui/extensions/size_screen_extension.dar
 import 'package:flutter/material.dart';
 
 class RoundedButtonWithIcon extends StatelessWidget {
-  RoundedButtonWithIcon({
+  const RoundedButtonWithIcon({
     Key? key,
     required this.onTap,
     required this.width,
@@ -39,9 +39,9 @@ class RoundedButtonWithIcon extends StatelessWidget {
                 size: 20.w,
               ),
             ),
-            Padding(
-              padding: const EdgeInsets.symmetric(vertical: 8.0),
-              child: const VerticalDivider(
+            const Padding(
+              padding: EdgeInsets.symmetric(vertical: 8.0),
+              child: VerticalDivider(
                 color: Colors.white,
                 thickness: 2,
               ),

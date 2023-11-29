@@ -39,7 +39,7 @@ class _LoginFormState extends State<_LoginForm> {
           const SizedBox(height: 20),
           CuidapetTextFormField(
             label: 'Senha',
-            obscuteText: true,
+            obscureText: true,
             controller: _passwordEC,
             validator: Validatorless.multiple(
               [

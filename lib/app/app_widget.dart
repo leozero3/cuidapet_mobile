@@ -12,7 +12,7 @@ class AppWidget extends StatelessWidget {
     Modular.setInitialRoute('/auth/');
     Modular.setObservers([Asuka.asukaHeroController]);
     return ScreenUtilInit(
-      designSize: Size(390, 844),
+      designSize: const Size(390, 844),
       builder: (_, __) => MaterialApp.router(
         title: UiConfig.title,
         debugShowCheckedModeBanner: false,
