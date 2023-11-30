@@ -12,3 +12,6 @@ void main() async {
     child: const AppWidget(),
   ));
 }
+
+
+// google_api_key=AIzaSyCkoz_wF7jt3pp6NzOoj0JpJBs6hWKn3-k

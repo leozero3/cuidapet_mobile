@@ -1,7 +1,8 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 part of '../address_page.dart';
 
 class _AddressSearchWidget extends StatefulWidget {
-  const _AddressSearchWidget({Key? key}) : super(key: key);
+  const _AddressSearchWidget();
 
   @override
   State<_AddressSearchWidget> createState() => _AddressSearchWidgetState();
@@ -31,8 +32,10 @@ class _AddressSearchWidgetState extends State<_AddressSearchWidget> {
             enabledBorder: border,
           ),
         ),
-        itemBuilder: (_, __) {
-          return Container();
+        itemBuilder: (_, item) {
+          return _ItemTile(
+            address: item.address,
+          );
         },
         onSuggestionSelected: _onSuggestionSelected,
         suggestionsCallback: _suggestionsCallback,
@@ -40,10 +43,26 @@ class _AddressSearchWidgetState extends State<_AddressSearchWidget> {
     );
   }
 
-  void _onSuggestionSelected(PlaceModel suggestion) {}
+  void _onSuggestionSelected(PlaceModel suggestion) {
+    print(suggestion.address);
+  }
 
   FutureOr<Iterable<PlaceModel>> _suggestionsCallback(String pattern) {
     print(pattern);
-    return [];
+    return [PlaceModel(address: 'lsg,lrgd12gdgd5g4', lat: 544, lng: 54787)];
+  }
+}
+
+class _ItemTile extends StatelessWidget {
+  final String address;
+
+  const _ItemTile({required this.address});
+
+  @override
+  Widget build(BuildContext context) {
+    return ListTile(
+      leading: const Icon(Icons.location_on),
+      title: Text(address),
+    );
   }
 }
