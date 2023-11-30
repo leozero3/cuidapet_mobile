@@ -1,10 +1,12 @@
 import 'dart:async';
 import 'package:cuidapet_mobile/app/core/ui/extensions/theme_extensions.dart';
 import 'package:cuidapet_mobile/app/models/place_model.dart';
+import 'package:cuidapet_mobile/app/modules/address/widgets/address_search_widget/address_search_controller.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_modular/flutter_modular.dart';
 import 'package:flutter_typeahead/flutter_typeahead.dart';
 part 'widgets/address_item.dart';
-part 'widgets/address_search_widget.dart';
+part 'widgets/address_search_widget/address_search_widget.dart';
 
 class AddressPage extends StatefulWidget {
   const AddressPage({super.key});
@@ -38,7 +40,9 @@ class _AddressPageState extends State<AddressPage> {
               const SizedBox(
                 height: 20,
               ),
-              _AddressSearchWidget(),
+              _AddressSearchWidget(addressSelectedCallback: (place) {
+                print(place);
+              }),
               const SizedBox(
                 height: 30,
               ),
