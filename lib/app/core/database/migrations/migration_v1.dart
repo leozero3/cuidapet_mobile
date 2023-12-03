@@ -1,21 +1,25 @@
-import 'package:cuidapet_mobile/app/core/database/migrations/migration.dart';
 import 'package:sqflite/sqflite.dart';
 
-class MigrationV1 extends Migration {
+import 'migration.dart';
+
+class MigrationV1 implements Migration {
   @override
   void create(Batch batch) {
     batch.execute(
-        '''
-    CREATE TABLE Address (
-      id INTEGER PRIMARY KEY AUTOINCREMENT,
-      address TEXT not null,
-      lat TEXT,
-      lng TEXT,
-      additional TEXT
-    )
-''');
+      '''
+      CREATE TABLE address (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        address TEXT NOT NULL,
+        lat TEXT,
+        lng TEXT,
+        additionalInfo TEXT
+      )
+''',
+    );
   }
 
   @override
-  void update(Batch batch) {}
+  void upgrade(Batch batch) {
+    return;
+  }
 }
