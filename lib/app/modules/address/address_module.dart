@@ -1,3 +1,4 @@
+import 'package:cuidapet_mobile/app/modules/address/address_controller.dart';
 import 'package:cuidapet_mobile/app/modules/address/address_detail/address_detail_module.dart';
 import 'package:cuidapet_mobile/app/modules/address/address_page.dart';
 import 'package:cuidapet_mobile/app/modules/address/widgets/address_search_widget/address_search_controller.dart';
@@ -11,6 +12,7 @@ class AddressModule extends Module {
             addressService: i(),
           ),
         ),
+        Bind.lazySingleton((i) => AddressController(addressService: i()))
       ];
 
   @override
