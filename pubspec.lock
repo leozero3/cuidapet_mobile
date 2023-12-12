@@ -18,7 +18,7 @@ packages:
     source: hosted
     version: "1.3.14"
   analyzer:
-    dependency: transitive
+    dependency: "direct dev"
     description:
       name: analyzer
       sha256: ea3d8652bda62982addfd92fdc2d0214e5f82e43325104990d4f4c4a2a313562
@@ -812,10 +812,10 @@ packages:
     dependency: "direct main"
     description:
       name: mobx
-      sha256: "42ae7277ec5c36fa5ce02aa14551065babce3c38a35947330144ff47bc775c75"
+      sha256: "537bee828f30a971ffd7d29d8e22bbdec5c9f5899ad4b01f3206a21eeb5c75de"
       url: "https://pub.dev"
     source: hosted
-    version: "2.2.1"
+    version: "2.2.3"
   mobx_codegen:
     dependency: "direct dev"
     description:

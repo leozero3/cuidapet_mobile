@@ -1,11 +1,12 @@
-// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:cuidapet_mobile/app/core/ui/extensions/size_screen_extension.dart';
 import 'package:cuidapet_mobile/app/core/ui/extensions/theme_extensions.dart';
 import 'package:cuidapet_mobile/app/core/ui/widgets/cuidapet_default_button.dart';
+import 'package:cuidapet_mobile/app/modules/address/address_detail/address_detail_controller.dart';
 import 'package:flutter/material.dart';
-
 import 'package:cuidapet_mobile/app/models/place_model.dart';
+import 'package:flutter_modular/flutter_modular.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:mobx/mobx.dart';
 
 class AddressDetailPage extends StatefulWidget {
   final PlaceModel place;
@@ -20,6 +21,28 @@ class AddressDetailPage extends StatefulWidget {
 }
 
 class _AddressDetailPageState extends State<AddressDetailPage> {
+  final _additionalEC = TextEditingController();
+  final controller = Modular.get<AddressDetailController>();
+
+  late final ReactionDisposer addressEntityDisposer;
+
+  @override
+  void initState() {
+    super.initState();
+    addressEntityDisposer =
+        reaction((_) => controller.addressEntity, (addressEntity) {
+      if (addressEntity != null) {
+        Navigator.pop(context, addressEntity);
+      }
+    });
+  }
+
+  @override
+  void dispose() {
+    _additionalEC.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -72,7 +95,7 @@ class _AddressDetailPageState extends State<AddressDetailPage> {
               initialValue: widget.place.address,
               readOnly: true,
               decoration: InputDecoration(
-                labelText: 'Enderço',
+                labelText: 'Endereço',
                 suffixIcon: Icon(Icons.edit),
               ),
             ),
@@ -80,6 +103,7 @@ class _AddressDetailPageState extends State<AddressDetailPage> {
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: TextFormField(
+              controller: _additionalEC,
               decoration: InputDecoration(
                 labelText: 'Complemento',
               ),
@@ -92,7 +116,9 @@ class _AddressDetailPageState extends State<AddressDetailPage> {
             width: .9.sw,
             height: 60.h,
             child: CuidapetDefaultButton(
-              onPressed: () {},
+              onPressed: () {
+                controller.saveAddress(widget.place, _additionalEC.text);
+              },
               label: 'Salvar',
             ),
           )
