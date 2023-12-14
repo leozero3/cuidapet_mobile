@@ -22,6 +22,14 @@ class _AddressPageState
     extends PageLifeCycleState<AddressController, AddressPage> {
   @override
   Widget build(BuildContext context) {
+    var circleAvatar = CircleAvatar(
+      backgroundColor: Colors.red,
+      radius: 30,
+      child: Icon(
+        Icons.near_me,
+        color: Colors.white,
+      ),
+    );
     return Scaffold(
       appBar: AppBar(
         iconTheme: IconThemeData(color: context.primaryColorDark),
@@ -45,27 +53,21 @@ class _AddressPageState
                 height: 20,
               ),
               _AddressSearchWidget(addressSelectedCallback: (place) {
-                Modular.to.pushNamed('/address/detail/', arguments: place);
+                controller.goToAddressDetail(place);
               }),
               const SizedBox(
                 height: 30,
               ),
-              const ListTile(
-                leading: CircleAvatar(
-                  backgroundColor: Colors.red,
-                  radius: 30,
-                  child: Icon(
-                    Icons.near_me,
-                    color: Colors.white,
-                  ),
-                ),
-                title: Text(
+              ListTile(
+                onTap: () => controller.myLocation(),
+                leading: circleAvatar,
+                title: const Text(
                   'Localização Atual',
                   style: TextStyle(
                     fontSize: 18,
                   ),
                 ),
-                trailing: Icon(Icons.arrow_forward_ios),
+                trailing: const Icon(Icons.arrow_forward_ios),
               ),
               const SizedBox(
                 height: 20,
