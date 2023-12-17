@@ -30,28 +30,27 @@ class _AddressPageState
   void initState() {
     super.initState();
     final reactionService =
-        reaction<Observable<bool>>((_) => controller.locationServiceUnavailable,
+        reaction<bool>((_) => controller.locationServiceUnavailable,
             (locationServiceUnavailable) {
-      if (locationServiceUnavailable.value) {
+      if (locationServiceUnavailable) {
         showDialogLocationServiceUnavailable();
       }
     });
 
-    final reactionLocationPermission =
-        reaction<Observable<LocationPermission>?>(
-            (_) => controller.locationPermission, (locationPermission) {
-      if (locationPermission != null &&
-          locationPermission.value == LocationPermission.denied) {
-        showDialogLocationDenied(tryAgain: () {
-          controller.myLocation();
-        });
-      } else if (locationPermission != null &&
-          locationPermission.value == LocationPermission.deniedForever) {
-        showDialogLocationDenied(tryAgain: () {
-          controller.myLocation();
-        });
-      }
-    });
+    final reactionLocationPermission = reaction<LocationPermission?>(
+      (_) => controller.locationPermission,
+      (locationPermission) {
+        if (locationPermission != null &&
+            locationPermission == LocationPermission.denied) {
+          showDialogLocationDenied(
+            tryAgain: () => controller.myLocation(),
+          );
+        } else if (locationPermission != null &&
+            locationPermission == LocationPermission.deniedForever) {
+          showDialogLocationDeniedForever();
+        }
+      },
+    );
 
     reactionDisposers.addAll([reactionService, reactionLocationPermission]);
   }
