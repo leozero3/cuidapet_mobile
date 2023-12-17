@@ -96,7 +96,12 @@ class _AddressDetailPageState extends State<AddressDetailPage> {
               readOnly: true,
               decoration: InputDecoration(
                 labelText: 'Endereço',
-                suffixIcon: Icon(Icons.edit),
+                suffixIcon: IconButton(
+                  icon: const Icon(Icons.edit),
+                  onPressed: () {
+                    Navigator.of(context).pop(widget.place);
+                  },
+                ),
               ),
             ),
           ),
@@ -104,7 +109,7 @@ class _AddressDetailPageState extends State<AddressDetailPage> {
             padding: const EdgeInsets.all(8.0),
             child: TextFormField(
               controller: _additionalEC,
-              decoration: InputDecoration(
+              decoration: const InputDecoration(
                 labelText: 'Complemento',
               ),
             ),
