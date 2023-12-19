@@ -128,11 +128,12 @@ class _AddressPageState
                   return Column(
                     children: controller.addresses
                         .map(
-                          (a) => _ItemTile(
+                          (a) => _AddressItem(
                             address: a.address,
                             onTap: () {
                               controller.selectAddress(a);
                             },
+                            additional: a.additional,
                           ),
                         )
                         .toList(),
