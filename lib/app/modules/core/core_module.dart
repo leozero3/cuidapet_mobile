@@ -37,6 +37,7 @@ class CoreModule extends Module {
           (i) => AuthStore(
             localStorage: i(),
             localSecureStorage: i(),
+            addressService: i(),
           ),
           export: true,
         ),
