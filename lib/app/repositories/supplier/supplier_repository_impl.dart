@@ -17,7 +17,7 @@ class SupplierRepositoryImpl implements SupplierRepository {
   @override
   Future<List<SupplierCategoryModel>> getCategories() async {
     try {
-      final result = await _restClient.auth().get('/categories');
+      final result = await _restClient.auth().get('/categories/');
       return result.data
           ?.map<SupplierCategoryModel>((categoryResponse) =>
               SupplierCategoryModel.fromMap(categoryResponse))

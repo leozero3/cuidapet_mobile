@@ -1,6 +1,7 @@
 import 'package:cuidapet_mobile/app/core/life_cycle/page_life_cycle_state.dart';
 import 'package:cuidapet_mobile/app/core/ui/extensions/theme_extensions.dart';
 import 'package:cuidapet_mobile/app/entities/address_entity.dart';
+import 'package:cuidapet_mobile/app/models/supplier_category_model.dart';
 import 'package:cuidapet_mobile/app/modules/home/home_controller.dart';
 import 'package:cuidapet_mobile/app/modules/home/widgets/home_appbar.dart';
 import 'package:flutter/material.dart';
@@ -32,8 +33,8 @@ class _HomePageState extends PageLifeCycleState<HomeController, HomePage> {
                   controller: controller,
                 ),
               ),
-              const SliverToBoxAdapter(
-                child: _HomeCategoriesWidget(),
+              SliverToBoxAdapter(
+                child: _HomeCategoriesWidget(controller),
               ),
             ];
           },
