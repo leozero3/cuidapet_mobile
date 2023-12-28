@@ -9,6 +9,8 @@ import 'package:flutter_modular/flutter_modular.dart';
 import 'package:mobx/mobx.dart';
 part 'home_controller.g.dart';
 
+enum SupplierPageType { list, grid }
+
 class HomeController = HomeControllerBase with _$HomeController;
 
 abstract class HomeControllerBase with Store, ControllerLifeCycle {
@@ -20,6 +22,9 @@ abstract class HomeControllerBase with Store, ControllerLifeCycle {
 
   @readonly
   var _listCategories = <SupplierCategoryModel>[];
+
+  @readonly
+  var _supplierPageTypeSelected = SupplierPageType.list;
 
   HomeControllerBase({
     required AddressService addressService,
@@ -63,6 +68,7 @@ abstract class HomeControllerBase with Store, ControllerLifeCycle {
     }
   }
 
+  @action
   Future<void> _getCategories() async {
     try {
       final categories = await _supplierService.getCategories();
@@ -73,5 +79,10 @@ abstract class HomeControllerBase with Store, ControllerLifeCycle {
         'error_message',
       );
     }
+  }
+
+  @action
+  void changeTabSupplier(SupplierPageType supplierPageType) {
+    _supplierPageTypeSelected = supplierPageType;
   }
 }

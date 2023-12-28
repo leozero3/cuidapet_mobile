@@ -8,6 +8,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 part 'widgets/home_address_widget.dart';
 part 'widgets/home_categories_widget.dart';
+part 'widgets/home_supplier_tab.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -21,24 +22,27 @@ class _HomePageState extends PageLifeCycleState<HomeController, HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        drawer: Drawer(
-          backgroundColor: Colors.grey[100],
+      drawer: Drawer(
+        backgroundColor: Colors.grey[100],
+      ),
+      body: NestedScrollView(
+        headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
+          return <Widget>[
+            HomeAppBar(controller),
+            SliverToBoxAdapter(
+              child: _HomeAddressWidget(
+                controller: controller,
+              ),
+            ),
+            SliverToBoxAdapter(
+              child: _HomeCategoriesWidget(controller),
+            ),
+          ];
+        },
+        body: HomeSupplierTab(
+          homeController: controller,
         ),
-        body: NestedScrollView(
-          headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
-            return <Widget>[
-              HomeAppBar(controller),
-              SliverToBoxAdapter(
-                child: _HomeAddressWidget(
-                  controller: controller,
-                ),
-              ),
-              SliverToBoxAdapter(
-                child: _HomeCategoriesWidget(controller),
-              ),
-            ];
-          },
-          body: Container(),
-        ));
+      ),
+    );
   }
 }
