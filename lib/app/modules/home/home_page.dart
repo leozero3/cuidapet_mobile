@@ -1,4 +1,5 @@
 import 'package:cuidapet_mobile/app/core/life_cycle/page_life_cycle_state.dart';
+import 'package:cuidapet_mobile/app/core/ui/extensions/size_screen_extension.dart';
 import 'package:cuidapet_mobile/app/core/ui/extensions/theme_extensions.dart';
 import 'package:cuidapet_mobile/app/entities/address_entity.dart';
 import 'package:cuidapet_mobile/app/models/supplier_category_model.dart';
@@ -23,7 +24,7 @@ class _HomePageState extends PageLifeCycleState<HomeController, HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       drawer: Drawer(
-        backgroundColor: Colors.grey[100],
+        backgroundColor: Colors.grey[100]!,
       ),
       body: NestedScrollView(
         headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
