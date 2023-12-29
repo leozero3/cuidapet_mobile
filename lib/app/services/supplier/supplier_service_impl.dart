@@ -1,4 +1,6 @@
+import 'package:cuidapet_mobile/app/entities/address_entity.dart';
 import 'package:cuidapet_mobile/app/models/supplier_category_model.dart';
+import 'package:cuidapet_mobile/app/models/supplier_nearby_me_model.dart';
 import 'package:cuidapet_mobile/app/repositories/supplier/supplier_repository.dart';
 
 import './supplier_service.dart';
@@ -12,4 +14,8 @@ class SupplierServiceImpl implements SupplierService {
   @override
   Future<List<SupplierCategoryModel>> getCategories() =>
       _repository.getCategories();
+
+  @override
+  Future<List<SupplierNearbyMeModel>> findNearBy(AddressEntity address) =>
+      _repository.findNearBy(address);
 }
