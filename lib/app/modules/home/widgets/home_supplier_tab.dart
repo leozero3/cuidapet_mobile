@@ -22,8 +22,8 @@ class HomeSupplierTab extends StatelessWidget {
               ),
               child: homeController.supplierPageTypeSelected ==
                       SupplierPageType.list
-                  ? const _HomeSupplierList()
-                  : const _HomeSupplierGrid(),
+                  ? _HomeSupplierList(homeController)
+                  : _HomeSupplierGrid(),
             );
           }),
         )
@@ -77,27 +77,34 @@ class _HomeTabHeader extends StatelessWidget {
 }
 
 class _HomeSupplierList extends StatelessWidget {
-  const _HomeSupplierList();
+  final HomeController _homeController;
+  const _HomeSupplierList(
+    this._homeController,
+  );
 
   @override
   Widget build(BuildContext context) {
     return CustomScrollView(
       slivers: [
-        SliverList(
-          delegate: SliverChildBuilderDelegate(
-            childCount: 10,
-            (context, index) {
-              return const _HomeSupplierListItemWidget();
-            },
-          ),
-        ),
+        Observer(builder: (_) {
+          return SliverList(
+            delegate: SliverChildBuilderDelegate(
+              childCount: _homeController.listSuppliersByAddress.length,
+              (context, index) {
+                final supplier = _homeController.listSuppliersByAddress[index];
+                return _HomeSupplierListItemWidget(supplier: supplier);
+              },
+            ),
+          );
+        }),
       ],
     );
   }
 }
 
 class _HomeSupplierListItemWidget extends StatelessWidget {
-  const _HomeSupplierListItemWidget({super.key});
+  final SupplierNearbyMeModel supplier;
+  const _HomeSupplierListItemWidget({super.key, required this.supplier});
 
   @override
   Widget build(BuildContext context) {
@@ -118,21 +125,22 @@ class _HomeSupplierListItemWidget extends StatelessWidget {
                 Expanded(
                   child: Container(
                     margin: const EdgeInsets.only(left: 50),
-                    child: const Column(
+                    child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Text(
-                          'Clinica abc',
+                          supplier.name,
                           overflow: TextOverflow.ellipsis,
                         ),
-                        SizedBox(height: 10),
+                        const SizedBox(height: 10),
                         Row(
                           children: [
-                            Icon(
+                            const Icon(
                               Icons.location_on,
                             ),
-                            Text('1.67 km de distancia'),
+                            Text(
+                                '${supplier.distance.toStringAsFixed(2)} km de distancia'),
                           ],
                         )
                       ],
@@ -175,8 +183,9 @@ class _HomeSupplierListItemWidget extends StatelessWidget {
                 color: Colors.grey,
                 borderRadius: BorderRadius.circular(100),
                 image: DecorationImage(
-                    image: AssetImage('assets/images/logo.png'),
-                    fit: BoxFit.contain),
+                  image: NetworkImage(supplier.logo),
+                  fit: BoxFit.contain,
+                ),
               ),
             ),
           )
