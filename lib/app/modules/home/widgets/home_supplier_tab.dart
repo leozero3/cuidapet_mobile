@@ -1,4 +1,3 @@
-// ignore_for_file: public_member_api_docs, sort_constructors_first
 part of '../home_page.dart';
 
 class HomeSupplierTab extends StatelessWidget {
@@ -23,7 +22,7 @@ class HomeSupplierTab extends StatelessWidget {
               child: homeController.supplierPageTypeSelected ==
                       SupplierPageType.list
                   ? _HomeSupplierList(homeController)
-                  : _HomeSupplierGrid(),
+                  : _HomeSupplierGrid(homeController),
             );
           }),
         )
@@ -104,7 +103,7 @@ class _HomeSupplierList extends StatelessWidget {
 
 class _HomeSupplierListItemWidget extends StatelessWidget {
   final SupplierNearbyMeModel supplier;
-  const _HomeSupplierListItemWidget({super.key, required this.supplier});
+  const _HomeSupplierListItemWidget({required this.supplier});
 
   @override
   Widget build(BuildContext context) {
@@ -196,10 +195,84 @@ class _HomeSupplierListItemWidget extends StatelessWidget {
 }
 
 class _HomeSupplierGrid extends StatelessWidget {
-  const _HomeSupplierGrid();
+  final HomeController controller;
+  const _HomeSupplierGrid(this.controller);
 
   @override
   Widget build(BuildContext context) {
-    return const Text('afkldsjf');
+    return CustomScrollView(
+      slivers: [
+        SliverGrid(
+          delegate:
+              SliverChildBuilderDelegate(childCount: 10, (context, index) {
+            return _HomeSupplierCardItemWidget();
+          }),
+          gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+            crossAxisCount: 2,
+            childAspectRatio: 1.1,
+          ),
+        ),
+      ],
+    );
+  }
+}
+
+class _HomeSupplierCardItemWidget extends StatelessWidget {
+  const _HomeSupplierCardItemWidget({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Stack(
+      children: [
+        Card(
+          margin: EdgeInsets.only(top: 40, left: 10, right: 10, bottom: 10),
+          elevation: 5,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(20),
+          ),
+          child: SizedBox.expand(
+            child: Padding(
+              padding: const EdgeInsets.only(
+                  top: 40, left: 10, right: 10, bottom: 10),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: [
+                  Text(
+                    'fsdfgsfg asdaddsa',
+                    style: context.textTheme.titleSmall,
+                    textAlign: TextAlign.center,
+                    overflow: TextOverflow.ellipsis,
+                  ),
+                  Text(
+                    'km de distancia',
+                    overflow: TextOverflow.ellipsis,
+                  ),
+                ],
+              ),
+            ),
+          ),
+        ),
+        Align(
+          alignment: Alignment.topCenter,
+          child: CircleAvatar(
+            radius: 40,
+            backgroundColor: Colors.grey[200],
+          ),
+        ),
+        Positioned(
+          top: 4,
+          right: 0,
+          left: 0,
+          child: Center(
+            child: CircleAvatar(
+              radius: 35,
+              backgroundImage: NetworkImage(
+                'https://upload.wikimedia.org/wikipedia/commons/thumb/2/23/Pontiac_GTO_1966.jpg/1200px-Pontiac_GTO_1966.jpg',
+              ),
+            ),
+          ),
+        ),
+      ],
+    );
   }
 }
