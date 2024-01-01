@@ -202,23 +202,28 @@ class _HomeSupplierGrid extends StatelessWidget {
   Widget build(BuildContext context) {
     return CustomScrollView(
       slivers: [
-        SliverGrid(
-          delegate:
-              SliverChildBuilderDelegate(childCount: 10, (context, index) {
-            return _HomeSupplierCardItemWidget();
-          }),
-          gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-            crossAxisCount: 2,
-            childAspectRatio: 1.1,
-          ),
-        ),
+        Observer(builder: (_) {
+          return SliverGrid(
+            delegate: SliverChildBuilderDelegate(
+                childCount: controller.listSuppliersByAddress.length,
+                (context, index) {
+              final supplier = controller.listSuppliersByAddress[index];
+              return _HomeSupplierCardItemWidget(supplier: supplier);
+            }),
+            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+              crossAxisCount: 2,
+              childAspectRatio: 1.1,
+            ),
+          );
+        }),
       ],
     );
   }
 }
 
 class _HomeSupplierCardItemWidget extends StatelessWidget {
-  const _HomeSupplierCardItemWidget({super.key});
+  final SupplierNearbyMeModel supplier;
+  const _HomeSupplierCardItemWidget({super.key, required this.supplier});
 
   @override
   Widget build(BuildContext context) {
@@ -238,13 +243,13 @@ class _HomeSupplierCardItemWidget extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
                   Text(
-                    'fsdfgsfg asdaddsa',
+                    supplier.name,
                     style: context.textTheme.titleSmall,
                     textAlign: TextAlign.center,
                     overflow: TextOverflow.ellipsis,
                   ),
                   Text(
-                    'km de distancia',
+                    '${supplier.distance.toStringAsFixed(2)} km de distancia',
                     overflow: TextOverflow.ellipsis,
                   ),
                 ],
@@ -266,9 +271,7 @@ class _HomeSupplierCardItemWidget extends StatelessWidget {
           child: Center(
             child: CircleAvatar(
               radius: 35,
-              backgroundImage: NetworkImage(
-                'https://upload.wikimedia.org/wikipedia/commons/thumb/2/23/Pontiac_GTO_1966.jpg/1200px-Pontiac_GTO_1966.jpg',
-              ),
+              backgroundImage: NetworkImage(supplier.logo),
             ),
           ),
         ),
