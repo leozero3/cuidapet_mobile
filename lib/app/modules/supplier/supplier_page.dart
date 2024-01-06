@@ -1,5 +1,6 @@
 import 'package:cuidapet_mobile/app/core/ui/extensions/theme_extensions.dart';
 import 'package:cuidapet_mobile/app/modules/supplier/widgets/supplier_detail.dart';
+import 'package:cuidapet_mobile/app/modules/supplier/widgets/supplier_service_widget.dart';
 import 'package:flutter/material.dart';
 
 class SupplierPage extends StatelessWidget {
@@ -36,9 +37,24 @@ class SupplierPage extends StatelessWidget {
           SliverToBoxAdapter(
             child: SupplierDetail(),
           ),
+          SliverToBoxAdapter(
+            child: Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Text(
+                'Serviços (0) Selecionados',
+                style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                  fontSize: 15,
+                ),
+                // textAlign: TextAlign.center,
+              ),
+            ),
+          ),
           SliverList(
-              delegate: SliverChildBuilderDelegate(
-                  (context, index) => Text(' dljfoisj')))
+            delegate: SliverChildBuilderDelegate(
+              (context, index) => SupplierServiceWidget(),
+            ),
+          ),
         ],
       ),
     );
