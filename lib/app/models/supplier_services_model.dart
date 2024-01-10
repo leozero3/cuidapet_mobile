@@ -1,11 +1,11 @@
 import 'dart:convert';
 
-class SupplierServices {
+class SupplierServicesModel {
   final int id;
   final int supplierId;
   final String name;
   final double price;
-  SupplierServices({
+  SupplierServicesModel({
     required this.id,
     required this.supplierId,
     required this.name,
@@ -21,8 +21,8 @@ class SupplierServices {
     };
   }
 
-  factory SupplierServices.fromMap(Map<String, dynamic> map) {
-    return SupplierServices(
+  factory SupplierServicesModel.fromMap(Map<String, dynamic> map) {
+    return SupplierServicesModel(
       id: map['id']?.toInt() ?? 0,
       supplierId: map['supplier_id']?.toInt() ?? 0,
       name: map['name'] ?? '',
@@ -32,6 +32,6 @@ class SupplierServices {
 
   String toJson() => json.encode(toMap());
 
-  factory SupplierServices.fromJson(String source) =>
-      SupplierServices.fromMap(json.decode(source));
+  factory SupplierServicesModel.fromJson(String source) =>
+      SupplierServicesModel.fromMap(json.decode(source));
 }
