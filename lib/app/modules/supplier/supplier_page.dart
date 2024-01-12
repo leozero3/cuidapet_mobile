@@ -117,6 +117,7 @@ class _SupplierPageState
                   final service = controller.supplierServices[index];
                   return SupplierServiceWidget(
                     service: service,
+                    supplierController: controller,
                   );
                 },
               ),

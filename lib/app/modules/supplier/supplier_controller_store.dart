@@ -3,6 +3,7 @@ import 'package:cuidapet_mobile/app/core/logger/app_logger.dart';
 import 'package:cuidapet_mobile/app/core/ui/widgets/loader.dart';
 import 'package:cuidapet_mobile/app/core/ui/widgets/messages.dart';
 import 'package:cuidapet_mobile/app/models/supplier_model.dart';
+import 'package:cuidapet_mobile/app/models/supplier_services_model.dart';
 import 'package:cuidapet_mobile/app/services/supplier/supplier_service.dart';
 import 'package:mobx/mobx.dart';
 
@@ -20,7 +21,10 @@ abstract class SupplierControllerStoreBase with Store, ControllerLifeCycle {
   SupplierModel? _supplierModel;
 
   @readonly
-  var _supplierServices = [];
+  var _supplierServices = <SupplierServicesModel>[];
+
+  @readonly
+  var _servicesSelected = <SupplierServicesModel>[].asObservable();
 
   SupplierControllerStoreBase(
       {required SupplierService supplierService, required AppLogger log})
@@ -64,4 +68,16 @@ abstract class SupplierControllerStoreBase with Store, ControllerLifeCycle {
       Messages.alert('Erro ao buscar serviços do fornecedor');
     }
   }
+
+  @action
+  void addOrRemoveServices(SupplierServicesModel supplierServicesModel) {
+    if (_servicesSelected.contains(supplierServicesModel)) {
+      _servicesSelected.remove(supplierServicesModel);
+    } else {
+      _servicesSelected.add(supplierServicesModel);
+    }
+  }
+
+  bool isServiceSelected(SupplierServicesModel servicesModel) =>
+      _servicesSelected.contains(servicesModel);
 }

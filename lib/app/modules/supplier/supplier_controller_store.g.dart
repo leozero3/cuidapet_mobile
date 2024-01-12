@@ -30,18 +30,37 @@ mixin _$SupplierControllerStore on SupplierControllerStoreBase, Store {
   late final _$_supplierServicesAtom = Atom(
       name: 'SupplierControllerStoreBase._supplierServices', context: context);
 
-  List<dynamic> get supplierServices {
+  List<SupplierServicesModel> get supplierServices {
     _$_supplierServicesAtom.reportRead();
     return super._supplierServices;
   }
 
   @override
-  List<dynamic> get _supplierServices => supplierServices;
+  List<SupplierServicesModel> get _supplierServices => supplierServices;
 
   @override
-  set _supplierServices(List<dynamic> value) {
+  set _supplierServices(List<SupplierServicesModel> value) {
     _$_supplierServicesAtom.reportWrite(value, super._supplierServices, () {
       super._supplierServices = value;
+    });
+  }
+
+  late final _$_servicesSelectedAtom = Atom(
+      name: 'SupplierControllerStoreBase._servicesSelected', context: context);
+
+  ObservableList<SupplierServicesModel> get servicesSelected {
+    _$_servicesSelectedAtom.reportRead();
+    return super._servicesSelected;
+  }
+
+  @override
+  ObservableList<SupplierServicesModel> get _servicesSelected =>
+      servicesSelected;
+
+  @override
+  set _servicesSelected(ObservableList<SupplierServicesModel> value) {
+    _$_servicesSelectedAtom.reportWrite(value, super._servicesSelected, () {
+      super._servicesSelected = value;
     });
   }
 
@@ -62,6 +81,20 @@ mixin _$SupplierControllerStore on SupplierControllerStoreBase, Store {
   Future<void> _findSupplierServices() {
     return _$_findSupplierServicesAsyncAction
         .run(() => super._findSupplierServices());
+  }
+
+  late final _$SupplierControllerStoreBaseActionController =
+      ActionController(name: 'SupplierControllerStoreBase', context: context);
+
+  @override
+  void addOrRemoveServices(SupplierServicesModel supplierServicesModel) {
+    final _$actionInfo = _$SupplierControllerStoreBaseActionController
+        .startAction(name: 'SupplierControllerStoreBase.addOrRemoveServices');
+    try {
+      return super.addOrRemoveServices(supplierServicesModel);
+    } finally {
+      _$SupplierControllerStoreBaseActionController.endAction(_$actionInfo);
+    }
   }
 
   @override
