@@ -50,12 +50,18 @@ class _SupplierPageState
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      floatingActionButton: FloatingActionButton.extended(
-        onPressed: () {},
-        label: const Text('Fazer agendamento'),
-        icon: const Icon(Icons.schedule),
-        backgroundColor: context.primaryColor,
-      ),
+      floatingActionButton: Observer(builder: (_) {
+        return AnimatedOpacity(
+          duration: Duration(milliseconds: 300),
+          opacity: controller.totalServicesSelected > 0 ? 1 : 0,
+          child: FloatingActionButton.extended(
+            onPressed: () {},
+            label: const Text('Fazer agendamento'),
+            icon: const Icon(Icons.schedule),
+            backgroundColor: context.primaryColor,
+          ),
+        );
+      }),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       body: Observer(builder: (_) {
         final supplier = controller.supplierModel;
@@ -97,12 +103,12 @@ class _SupplierPageState
                 supplier: supplier,
               ),
             ),
-            const SliverToBoxAdapter(
+            SliverToBoxAdapter(
               child: Padding(
-                padding: EdgeInsets.all(8.0),
+                padding: const EdgeInsets.all(8.0),
                 child: Text(
-                  'Serviços (0) Selecionados',
-                  style: TextStyle(
+                  'Serviços (${controller.totalServicesSelected}) Selecionado${controller.totalServicesSelected > 1 ? 's' : ''}',
+                  style: const TextStyle(
                     fontWeight: FontWeight.bold,
                     fontSize: 15,
                   ),

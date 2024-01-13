@@ -80,4 +80,6 @@ abstract class SupplierControllerStoreBase with Store, ControllerLifeCycle {
 
   bool isServiceSelected(SupplierServicesModel servicesModel) =>
       _servicesSelected.contains(servicesModel);
+
+  int get totalServicesSelected => _servicesSelected.length;
 }
