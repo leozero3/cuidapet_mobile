@@ -4,8 +4,10 @@ import 'package:cuidapet_mobile/app/core/ui/widgets/loader.dart';
 import 'package:cuidapet_mobile/app/core/ui/widgets/messages.dart';
 import 'package:cuidapet_mobile/app/models/supplier_model.dart';
 import 'package:cuidapet_mobile/app/models/supplier_services_model.dart';
+import 'package:cuidapet_mobile/app/modules/schedules/model/schedule_view_model.dart';
 import 'package:cuidapet_mobile/app/services/supplier/supplier_service.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_modular/flutter_modular.dart';
 import 'package:mobx/mobx.dart';
 import 'package:url_launcher/url_launcher_string.dart';
 
@@ -96,5 +98,28 @@ abstract class SupplierControllerStoreBase with Store, ControllerLifeCycle {
       );
       Messages.info('Telefone copiado');
     }
+  }
+
+  Future<void> goToGeoOrCopyAddressToClipart() async {
+    final geoUrl = 'geo:${_supplierModel?.lat}, ${_supplierModel?.lng}';
+    if (await canLaunchUrlString(geoUrl)) {
+      await launchUrlString(geoUrl);
+      print(geoUrl);
+    } else {
+      await Clipboard.setData(
+        ClipboardData(text: _supplierModel?.address ?? ''),
+      );
+      Messages.info('Endereço copiada');
+    }
+  }
+
+  void goToSchedule() {
+    Modular.to.pushNamed(
+      '/schedules/',
+      arguments: ScheduleViewModel(
+        supplierId: _supplierId,
+        services: _servicesSelected.toList(),
+      ),
+    );
   }
 }

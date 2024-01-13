@@ -55,7 +55,7 @@ class _SupplierPageState
           duration: Duration(milliseconds: 300),
           opacity: controller.totalServicesSelected > 0 ? 1 : 0,
           child: FloatingActionButton.extended(
-            onPressed: () {},
+            onPressed: controller.goToSchedule,
             label: const Text('Fazer agendamento'),
             icon: const Icon(Icons.schedule),
             backgroundColor: context.primaryColor,
@@ -100,6 +100,7 @@ class _SupplierPageState
             ),
             SliverToBoxAdapter(
               child: SupplierDetail(
+                controller: controller,
                 supplier: supplier,
               ),
             ),
